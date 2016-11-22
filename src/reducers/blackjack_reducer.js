@@ -1,5 +1,25 @@
 export default (state={}, action) => {
   switch (action.type) {
+    case 'SET_AI_CARDS':
+      return Object.assign({}, state, {
+        aiCards: [...state.aiCards, ...action.payload.aiCards],
+        deck: action.payload.deck
+      });
+    case 'SET_USER_CARDS':
+      return Object.assign({}, state, {
+        userCards: [...state.userCards, ...action.payload.userCards],
+        deck: action.payload.deck
+      });
+    case 'HIT_AI':
+      return Object.assign({}, state, {
+        aiCards: [...state.aiCards, action.payload.aiCard],
+        deck: action.payload.deck
+      });
+    case 'HIT_USER':
+      return Object.assign({}, state, {
+        userCards: [...state.userCards, action.payload.userCard],
+        deck: action.payload.deck
+      });
     case 'FETCH_DECK':
       return {
         userCards: [],

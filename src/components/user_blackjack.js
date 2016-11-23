@@ -14,10 +14,10 @@ export default function(props) {
         {cards}
       </ul>
       <form id="userHit" onSubmit={props.hitMe}>
-        <button type="submit">Hit Me</button>
+        <button type="submit"> Hit Me </button>
       </form>
       <form id="userStay" onSubmit={props.stay}>
-        <button type="submit">Stay</button>
+        <button type="submit"> Stay </button>
       </form>
     </div>
   )

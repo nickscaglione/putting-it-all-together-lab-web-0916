@@ -6,6 +6,15 @@ import { setAICards, setUserCards, hitAI, hitUser } from '../actions/blackjack_a
 
 
 export default class App extends React.Component {
+  constructor(){
+    super()
+
+    this.hitMe = this.hitMe.bind(this)
+    this.calculateAiScore = this.calculateAiScore.bind(this)
+    this.calculateUserScore = this.calculateUserScore.bind(this)
+    this.stay = this.stay.bind(this)
+  }
+
   hitMe(event){
     event.preventDefault()
     if (event.target.id === "userHit") {
@@ -20,7 +29,7 @@ export default class App extends React.Component {
     this.props.store.getState().aiCards.forEach(card => {
       total += card.value}
     )
-    return total
+    return total > 21 ? `${total} - BUST` : total
   }
 
   calculateUserScore(){
@@ -28,7 +37,7 @@ export default class App extends React.Component {
     this.props.store.getState().userCards.forEach(card => {
       total += card.value}
     )
-    return total
+    return total > 21 ? `${total} - BUST` : total
   }
 
   stay(event){
@@ -43,8 +52,8 @@ export default class App extends React.Component {
   render(){
     return(
       <div>
-        <UserBlackjack userCards={this.props.store.getState().userCards} score={this.calculateUserScore.bind(this)} hitMe={this.hitMe.bind(this)} stay={this.stay.bind(this)}/>
-        <AIBlackjack aiCards={this.props.store.getState().aiCards} score={this.calculateAiScore.bind(this)} hitMe={this.hitMe.bind(this)} stay={this.stay.bind(this)}/>
+        <UserBlackjack userCards={this.props.store.getState().userCards} score={this.calculateUserScore} hitMe={this.hitMe} stay={this.stay}/>
+        <AIBlackjack aiCards={this.props.store.getState().aiCards} score={this.calculateAiScore} hitMe={this.hitMe} stay={this.stay}/>
       </div>
     )
   }

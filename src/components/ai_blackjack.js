@@ -16,9 +16,9 @@ export default function(props) {
       <form id="AIHit" onSubmit={props.hitMe}>
         <button type="submit">Hit Me</button>
       </form>
-      <form id="AIStay" onSubmit={props.stay}>
+      {/* <form id="AIStay" onSubmit={props.stay}>
         <button type="submit">Stay</button>
-      </form>
+      </form> */}
     </div>
   )
 

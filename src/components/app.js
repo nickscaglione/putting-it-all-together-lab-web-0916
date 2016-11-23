@@ -37,23 +37,35 @@ export default class App extends React.Component {
     this.props.store.getState().userCards.forEach(card => {
       total += card.value}
     )
-    return total > 21 ? `${total} - BUST` : total
+    if (total > 21) {
+      // window.document.getElementById('userHit').children[0].disabled = "true"
+      // window.document.getElementById('userStay').children[0].disabled = "true"
+      window.alert('You lose.')
+      return `${total} - BUST`
+    } else {
+      return total
+    }
   }
 
   stay(event){
     event.preventDefault()
-    if (event.target.id === "userStay") {
-      return 'foo'
-    } else if (event.target.id === "AIStay") {
-      return 'bar'
+    if (this.calculateUserScore() > this.calculateAiScore()) {
+      window.alert('Player 1 wins!')
+    } else if (this.calculateUserScore() < this.calculateAiScore()) {
+      window.alert('Computer player wins!')
+    } else {
+      window.alert('you both suck')
     }
+    // window.document.getElementById('userHit').children[0].disabled = "true"
+    // window.document.getElementById('userStay').children[0].disabled = "true"
+
   }
 
   render(){
     return(
       <div>
         <UserBlackjack userCards={this.props.store.getState().userCards} score={this.calculateUserScore} hitMe={this.hitMe} stay={this.stay}/>
-        <AIBlackjack aiCards={this.props.store.getState().aiCards} score={this.calculateAiScore} hitMe={this.hitMe} stay={this.stay}/>
+        <AIBlackjack aiCards={this.props.store.getState().aiCards} score={this.calculateAiScore} hitMe={this.hitMe}/>
       </div>
     )
   }
